@@ -2,6 +2,7 @@ package com.example.calculadora;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,8 +15,8 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView res;
     private TextView res2;
-    private float firstnumber ;
-    private float secondnumber ;
+    private double firstnumber ;
+    private double secondnumber ;
     private String operador ;
     private String tag;
 
@@ -25,36 +26,37 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         firstnumber = 0;
-        secondnumber =0;
+        secondnumber = 0;
         operador = "";
 
-        res =  (TextView) findViewById(R.id.textView_Resultado);
-        res2 =  (TextView) findViewById(R.id.textView_segundonumero);
+        res = findViewById(R.id.textView_Resultado);
+        res2 = findViewById(R.id.textView_segundonumero);
         res.setText("0");
 
 
-        Button bc = (Button) findViewById(R.id.button_c);
-        Button be = (Button) findViewById(R.id.button_eliminar);
-        Button bm = (Button) findViewById(R.id.button_mas);
-        Button br = (Button) findViewById(R.id.button_menos);
-        Button bp = (Button) findViewById(R.id.button_multiplica);
-        Button bd = (Button) findViewById(R.id.button_division);
-        Button bi = (Button) findViewById(R.id.button_igual);
-        Button bpu = (Button) findViewById(R.id.button_punto);
-        Button bs = (Button) findViewById(R.id.button_signoInverso);
-        Button bpa = (Button) findViewById(R.id.button_parentesis);
-        Button bpor = (Button) findViewById(R.id.button_porcentaje);
+        Button bc = findViewById(R.id.button_c);
+        Button be =  findViewById(R.id.button_eliminar);
+        Button bm =  findViewById(R.id.button_mas);
+        Button br =  findViewById(R.id.button_menos);
+        Button bp =  findViewById(R.id.button_multiplica);
+        Button bd =  findViewById(R.id.button_division);
+        Button bi =  findViewById(R.id.button_igual);
+        Button bpu =  findViewById(R.id.button_punto);
+        Button bs =  findViewById(R.id.button_signoInverso);
+        Button bpa =  findViewById(R.id.button_parentesis);
+        Button bpor = findViewById(R.id.button_porcentaje);
+        Button bsqrt = findViewById(R.id.button_raiz);
 
-        Button b0 = (Button) findViewById(R.id.button_0);
-        Button b1 = (Button) findViewById(R.id.button_1);
-        Button b2 = (Button) findViewById(R.id.button_2);
-        Button b3 = (Button) findViewById(R.id.button_3);
-        Button b4 = (Button) findViewById(R.id.button_4);
-        Button b5 = (Button) findViewById(R.id.button_5);
-        Button b6 = (Button) findViewById(R.id.button_6);
-        Button b7 = (Button) findViewById(R.id.button_7);
-        Button b8 = (Button) findViewById(R.id.button_8);
-        Button b9 = (Button) findViewById(R.id.button_9);
+        Button b0 =  findViewById(R.id.button_0);
+        Button b1 =  findViewById(R.id.button_1);
+        Button b2 =  findViewById(R.id.button_2);
+        Button b3 =  findViewById(R.id.button_3);
+        Button b4 =  findViewById(R.id.button_4);
+        Button b5 =  findViewById(R.id.button_5);
+        Button b6 =  findViewById(R.id.button_6);
+        Button b7 =  findViewById(R.id.button_7);
+        Button b8 =  findViewById(R.id.button_8);
+        Button b9 =  findViewById(R.id.button_9);
 
 
         ButtonHandler blistener = new ButtonHandler();
@@ -80,10 +82,18 @@ public class MainActivity extends AppCompatActivity {
         bpa.setOnClickListener(blistener);
         bpor.setOnClickListener(blistener);
 
+
+
+        //Landscape
+        if (bsqrt != null) {
+            bsqrt.setOnClickListener(blistener);
+        }
+
     }
 
     private class ButtonHandler implements View.OnClickListener{
 
+        @SuppressLint("NonConstantResourceId")
         @Override
         public void onClick(View view) {
             switch (view.getId()){
@@ -151,9 +161,34 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.button_porcentaje:
                     opera("%");
                     break;
+                case R.id.button_raiz:
+                    raiz();
+                    break;
                 default:
                     numeroPresionado("ERROR");
             }
+        }
+    }
+
+    void raiz(){
+
+        String s = res.getText().toString();
+        try {
+
+                if(s.equals("0")){
+                    operador = "√";
+                    res.setText("√");
+                }
+                else{
+                    firstnumber = Double.parseDouble(res.getText().toString());
+                    operador = "√";
+                    res.setText("√" + res.getText());
+                }
+
+        }
+        catch (Exception e){
+            res.setText("0");
+            res2.setText("");
         }
     }
     void parentesis(){
@@ -226,7 +261,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void igual (){
-        float resultado;
+        double resultado;
         String s;
 
         try{
@@ -234,6 +269,21 @@ public class MainActivity extends AppCompatActivity {
 
 
         switch (operador){
+
+            case "√":
+                String n = (String) res.getText().toString();
+                int i = n.length();
+                n = n.substring(1,i);
+                res.setText(n);
+
+                firstnumber =  Float.parseFloat(res.getText().toString());
+                resultado = Math.sqrt(firstnumber);
+                s=String.valueOf(resultado);
+                res.setText(s);
+
+                Log.i( "Operador = %d", operador);
+
+                break;
             case "+":
                 resultado = firstnumber + secondnumber;
                 s=String.valueOf(resultado);
@@ -299,7 +349,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             String n = (String) res.getText().toString();
             int i = n.length()-1;
-            n = n.substring(0,n.length()-1);
+            n = n.substring(0,i);
             res.setText(n);
         }
         catch (Exception e){

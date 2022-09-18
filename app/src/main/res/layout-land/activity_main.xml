@@ -460,7 +460,7 @@
         android:layout_marginTop="2dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="2dp"
-        android:text="√ "
+        android:text="√"
         android:textColor="#D09E9D"
         android:textSize="12sp"
         app:backgroundTint="#171717"
@@ -470,7 +470,8 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline12"
         app:layout_constraintHorizontal_bias="0.523"
         app:layout_constraintStart_toStartOf="@+id/guideline13"
-        app:layout_constraintTop_toTopOf="@+id/guideline5" />
+        app:layout_constraintTop_toTopOf="@+id/guideline5"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <Button
         android:id="@+id/button_parentesis"
