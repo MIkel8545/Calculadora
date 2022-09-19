@@ -45,7 +45,10 @@ public class MainActivity extends AppCompatActivity {
         Button bs =  findViewById(R.id.button_signoInverso);
         Button bpa =  findViewById(R.id.button_parentesis);
         Button bpor = findViewById(R.id.button_porcentaje);
-        Button bsqrt = findViewById(R.id.button_raiz);
+        Button bsqrt = findViewById(R.id.button_sqrt);
+        Button babs = findViewById(R.id.button_absoluto);
+        Button bpi = findViewById(R.id.button_pi);
+        Button e = findViewById(R.id.button_e);
 
         Button b0 =  findViewById(R.id.button_0);
         Button b1 =  findViewById(R.id.button_1);
@@ -82,12 +85,20 @@ public class MainActivity extends AppCompatActivity {
         bpa.setOnClickListener(blistener);
         bpor.setOnClickListener(blistener);
 
-
-
         //Landscape
         if (bsqrt != null) {
             bsqrt.setOnClickListener(blistener);
         }
+        if (babs != null) {
+            babs.setOnClickListener(blistener);
+        }
+        if (bpi != null) {
+            bpi.setOnClickListener(blistener);
+        }
+        if (e != null) {
+            e.setOnClickListener(blistener);
+        }
+
 
     }
 
@@ -161,28 +172,93 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.button_porcentaje:
                     opera("%");
                     break;
-                case R.id.button_raiz:
-                    raiz();
+                case R.id.button_sqrt:
+                    raiz("√");
+                    break;
+                case R.id.button_absoluto:
+                    abs();
+                    break;
+                case R.id.button_pi:
+                    pi();
+                    break;
+                case R.id.button_e:
+                    e();
                     break;
                 default:
                     numeroPresionado("ERROR");
             }
         }
     }
+    void e(){
+        try {
+            if (res.getText() == "0") {
+                firstnumber = 2.718281;
+                res.setText("2.718281");
 
-    void raiz(){
+            }
+            else {
+                firstnumber = Double.parseDouble(res.getText().toString());
+                secondnumber = 2.718281;
+                double r = firstnumber * secondnumber;
+                res.setText( String.valueOf(r) );
+
+            }
+        }
+        catch (Exception e){
+            res.setText("0");
+            res2.setText("");
+        }
+    }
+    void pi(){
+
+        try {
+            if (res.getText() == "0") {
+                firstnumber = 3.141592;
+                res.setText("3.141592");
+
+            }
+            else {
+                firstnumber = Double.parseDouble(res.getText().toString());
+                secondnumber = 3.141592;
+                double r = firstnumber * secondnumber;
+                res.setText( String.valueOf(r) );
+
+            }
+        }
+        catch (Exception e){
+            res.setText("0");
+            res2.setText("");
+        }
+    }
+    void abs(){
+        String s = res.getText().toString();
+        try {
+            firstnumber = Float.parseFloat(s);
+            firstnumber = Math.abs(firstnumber);
+            res.setText( String.valueOf(firstnumber));
+        }
+        catch (Exception e){
+            res.setText("0");
+            res2.setText("");
+        }
+    }
+
+    void raiz(String op){
 
         String s = res.getText().toString();
         try {
 
                 if(s.equals("0")){
-                    operador = "√";
-                    res.setText("√");
+
+
+                    operador = op;
+                    res2.setText("√");
                 }
                 else{
-                    firstnumber = Double.parseDouble(res.getText().toString());
+                    firstnumber = Float.parseFloat(res.getText().toString());
+                    res.setText( String.valueOf(firstnumber));
+                    res2.setText("√");
                     operador = "√";
-                    res.setText("√" + res.getText());
                 }
 
         }
@@ -265,25 +341,11 @@ public class MainActivity extends AppCompatActivity {
         String s;
 
         try{
-        secondnumber =  Float.parseFloat(res.getText().toString());
+        secondnumber =  Double.parseDouble(res.getText().toString());
 
 
         switch (operador){
 
-            case "√":
-                String n = (String) res.getText().toString();
-                int i = n.length();
-                n = n.substring(1,i);
-                res.setText(n);
-
-                firstnumber =  Float.parseFloat(res.getText().toString());
-                resultado = Math.sqrt(firstnumber);
-                s=String.valueOf(resultado);
-                res.setText(s);
-
-                Log.i( "Operador = %d", operador);
-
-                break;
             case "+":
                 resultado = firstnumber + secondnumber;
                 s=String.valueOf(resultado);
@@ -331,6 +393,25 @@ public class MainActivity extends AppCompatActivity {
                     toast.show();
                     break;
                 }
+            case "√":
+                String n = (String) res.getText().toString();
+                int i = n.length();
+                n = n.substring(0,i);
+
+                res2.setText("");
+
+                firstnumber =  Double.parseDouble(n);
+                resultado = Math.sqrt(firstnumber);
+                s=String.valueOf(resultado);
+                res.setText(s);
+                break;
+            case "pi" :
+                resultado = firstnumber * secondnumber;
+                s=String.valueOf(resultado);
+                res.setText(s);
+
+                res2.setText("");
+                break;
 
             default:
         }
