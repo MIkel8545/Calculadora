@@ -49,6 +49,10 @@ public class MainActivity extends AppCompatActivity {
         Button babs = findViewById(R.id.button_absoluto);
         Button bpi = findViewById(R.id.button_pi);
         Button e = findViewById(R.id.button_e);
+        Button ex = findViewById(R.id.button_ex);
+        Button x2 = findViewById(R.id.button_x2);
+        Button xn = findViewById(R.id.button_xn);
+
 
         Button b0 =  findViewById(R.id.button_0);
         Button b1 =  findViewById(R.id.button_1);
@@ -98,7 +102,15 @@ public class MainActivity extends AppCompatActivity {
         if (e != null) {
             e.setOnClickListener(blistener);
         }
-
+        if (ex != null){
+            ex.setOnClickListener(blistener);
+        }
+        if (x2 != null){
+            x2.setOnClickListener(blistener);
+        }
+        if (xn != null){
+            xn.setOnClickListener(blistener);
+        }
 
     }
 
@@ -184,9 +196,98 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.button_e:
                     e();
                     break;
+                case R.id.button_ex:
+                    ex();
+                    break;
+                case R.id.button_x2:
+                    xpow();
+                    break;
+                case R.id.button_xn:
+                    xn();
+                    break;
                 default:
                     numeroPresionado("ERROR");
             }
+        }
+    }
+
+    void xn(){
+        try {
+            if (res.getText() == "0")
+            {
+                Context context = getApplicationContext();
+                CharSequence text = "El formato no es valido";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+            }
+            else
+            {
+                firstnumber = Double.parseDouble(res.getText().toString());
+                operador = "xn";
+                res.setText("0");
+                res2.setText(String.valueOf(firstnumber) + " ^  ");
+            }
+        }
+        catch (Exception e)
+        {
+            res.setText("0");
+            res2.setText("");
+        }
+    }
+
+
+
+    void xpow(){
+        try {
+            if (res.getText() == "0")
+            {
+                Context context = getApplicationContext();
+                CharSequence text = "El formato no es valido";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+            }
+            else
+            {
+                firstnumber = Double.parseDouble(res.getText().toString());
+                secondnumber = 2;
+                operador = "x2";
+                res.setText("0");
+                res2.setText(String.valueOf(firstnumber) + " ^ 2 ");
+            }
+        }
+        catch (Exception e)
+        {
+            res.setText("0");
+            res2.setText("");
+        }
+    }
+
+    void ex(){
+        try {
+            if (res.getText() == "0") {
+                firstnumber = 2.718281;
+                res2.setText("2.718281");
+                operador = "xn";
+
+            }
+            else{
+                Context context = getApplicationContext();
+                CharSequence text = "El formato no es valido";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+            }
+
+        }
+
+        catch (Exception e){
+            res.setText("0");
+            res2.setText("");
         }
     }
     void e(){
@@ -412,6 +513,21 @@ public class MainActivity extends AppCompatActivity {
 
                 res2.setText("");
                 break;
+            case "x2":
+                resultado = Math.pow(firstnumber, 2);
+                s=String.valueOf(resultado);
+                res.setText(s);
+
+                res2.setText("");
+                break;
+            case "xn":
+            resultado = Math.pow(firstnumber, secondnumber);
+            s=String.valueOf(resultado);
+            res.setText(s);
+
+            res2.setText("");
+            break;
+
 
             default:
         }
