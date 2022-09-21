@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private String operador ;
     private String tag;
     private Boolean fl;
+    private String prueba;
 
 
     @Override
