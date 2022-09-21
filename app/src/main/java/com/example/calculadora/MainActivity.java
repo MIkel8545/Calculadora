@@ -669,7 +669,17 @@ public class MainActivity extends AppCompatActivity {
 
         String s = res.getText().toString();
         try {
+                Double x = Double.parseDouble(s);
+                if(x < 0){
 
+                    res.setText("ERROR");
+                    Context context = getApplicationContext();
+                    CharSequence text = "Numero indefinido";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                }
                 if(s.equals("0")){
 
 

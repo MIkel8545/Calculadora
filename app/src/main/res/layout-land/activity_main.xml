@@ -324,9 +324,9 @@
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="2dp"
         android:text="="
+        android:textColor="#171717"
         android:textSize="12sp"
-        android:textColor="#D09E9D"
-        app:backgroundTint="#171717"
+        app:backgroundTint="#D09E9D"
         app:cornerRadius="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -398,8 +398,8 @@
         android:layout_marginBottom="2dp"
 
         android:text="C"
+        android:textColor="#D1362D"
         android:textSize="12sp"
-        android:textColor="#D09E9D"
         app:backgroundTint="#171717"
         app:cornerRadius="50dp"
         app:iconTint="#FFFFFF"
@@ -794,23 +794,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.11" />
+        app:layout_constraintGuide_percent="0.09" />
 
     <TextView
         android:id="@+id/textView_Resultado"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="5dp"
         android:gravity="center"
         android:text="0"
         android:textAlignment="textEnd"
         android:textColor="#FFFFFF"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline10"
+        app:layout_constraintBottom_toTopOf="@+id/guideline11"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline10"
         app:layout_constraintVertical_bias="1.0" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -829,12 +830,12 @@
         android:textAlignment="textEnd"
         android:textColor="#78CFD5"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline11"
+        app:layout_constraintBottom_toTopOf="@+id/guideline10"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline10"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline12"
@@ -865,7 +866,7 @@
         android:id="@+id/textView_rad"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="10dp"
         android:gravity="center"
         android:textColor="#D09E9D"
         app:layout_constraintBottom_toTopOf="@+id/guideline10"
