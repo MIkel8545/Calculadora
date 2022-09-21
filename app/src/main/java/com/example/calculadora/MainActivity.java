@@ -15,11 +15,13 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView res;
     private TextView res2;
+    private TextView type;
     private double firstnumber ;
     private double secondnumber ;
     private String operador ;
     private String tag;
-    private String rad;
+    private Boolean fl;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +31,12 @@ public class MainActivity extends AppCompatActivity {
         firstnumber = 0;
         secondnumber = 0;
         operador = "";
-        rad = "";
+        fl = false;
+
 
         res = findViewById(R.id.textView_Resultado);
         res2 = findViewById(R.id.textView_segundonumero);
+        type = findViewById(R.id.textView_rad);
         res.setText("0");
 
 
@@ -61,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         Button cos = findViewById(R.id.button_cos);
         Button tan = findViewById(R.id.button_tan);
         Button rad = findViewById(R.id.button_rad);
+        Button inv = findViewById(R.id.button_flecha);
 
 
         Button b0 =  findViewById(R.id.button_0);
@@ -73,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
         Button b7 =  findViewById(R.id.button_7);
         Button b8 =  findViewById(R.id.button_8);
         Button b9 =  findViewById(R.id.button_9);
+
 
 
         ButtonHandler blistener = new ButtonHandler();
@@ -146,6 +152,10 @@ public class MainActivity extends AppCompatActivity {
         if (rad != null)
         {
             rad.setOnClickListener(blistener);
+        }
+        if (inv != null)
+        {
+            inv.setOnClickListener(blistener);
         }
 
     }
@@ -262,19 +272,55 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.button_rad:
                     rad();
                     break;
+                case R.id.button_flecha:
+                    inv();
+                    break;
                 default:
                     numeroPresionado("ERROR");
             }
         }
     }
+    void inv(){
+        Button sin = findViewById(R.id.button_sin);
+        Button cos = findViewById(R.id.button_cos);
+        Button tan = findViewById(R.id.button_tan);
+        if (fl == false)
+        {
+            sin.setText("sin⁻¹");
+            sin.setTextSize(9);
+            cos.setText("cos⁻¹");
+            cos.setTextSize(9);
+            tan.setText("tan⁻¹");
+            tan.setTextSize(9);
+            fl=true;
+        }
+        else
+        {
+            sin.setText("sin");
+            sin.setTextSize(12);
+            cos.setText("cos");
+            cos.setTextSize(12);
+            tan.setText("tan");
+            tan.setTextSize(12);
+            fl=false;
+        }
 
+    }
     void rad(){
         try{
-
+            String rad = type.getText().toString();
+            if(rad == "RAD"){
+                type.setText("");
+            }
+            else
+            {
+                type.setText("RAD");
+            }
         }
         catch (Exception e)
         {
-
+            res.setText("0");
+            res2.setText("");
         }
     }
 
@@ -282,19 +328,35 @@ public class MainActivity extends AppCompatActivity {
     void tan(){
         try{
 
-            if (res.getText() == "0")
+            if(fl == true)
             {
-                operador = "tan";
-                res.setText("0");
-                res2.setText( "tan( ");
+                if (res.getText() == "0")
+                {
+                    operador = "tan⁻¹";
+                    res.setText("0");
+                    res2.setText( "tan⁻¹( ");
+                }
+                else
+                {
+                    firstnumber = Double.parseDouble(res.getText().toString());
+                    operador = "tan⁻¹";
+                    res2.setText( "tan⁻¹(" + res.getText().toString() +")");
+                }
             }
             else
             {
-                firstnumber = Double.parseDouble(res.getText().toString());
-                operador = "tan";
-                res2.setText( "tan(" + res.getText().toString() +")");
-
-
+                if (res.getText() == "0")
+                {
+                    operador = "tan";
+                    res.setText("0");
+                    res2.setText( "tan(");
+                }
+                else
+                {
+                    firstnumber = Double.parseDouble(res.getText().toString());
+                    operador = "tan";
+                    res2.setText( "tan(" + res.getText().toString() +")");
+                }
             }
 
         }
@@ -306,20 +368,38 @@ public class MainActivity extends AppCompatActivity {
     void cos(){
         try{
 
-            if (res.getText() == "0")
+            if(fl == true)
             {
-                operador = "cos";
-                res.setText("0");
-                res2.setText( "cos( ");
+                if (res.getText() == "0")
+                {
+                    operador = "cos⁻¹";
+                    res.setText("0");
+                    res2.setText( "cos⁻¹( ");
+                }
+                else
+                {
+                    firstnumber = Double.parseDouble(res.getText().toString());
+                    operador = "cos⁻¹";
+                    res2.setText( "cos⁻¹(" + res.getText().toString() +")");
+                }
             }
             else
             {
-                firstnumber = Double.parseDouble(res.getText().toString());
-                operador = "cos";
-                res2.setText( "cos(" + res.getText().toString() +")");
-
-
+                if (res.getText() == "0")
+                {
+                    operador = "cos";
+                    res.setText("0");
+                    res2.setText( "cos( ");
+                }
+                else
+                {
+                    firstnumber = Double.parseDouble(res.getText().toString());
+                    operador = "cos";
+                    res2.setText( "cos(" + res.getText().toString() +")");
+                }
             }
+
+
 
         }
         catch (Exception e ){
@@ -331,19 +411,35 @@ public class MainActivity extends AppCompatActivity {
     void sin(){
         try{
 
-            if (res.getText() == "0")
+            if(fl == true)
             {
-                operador = "sin";
-                res.setText("0");
-                res2.setText( "sin( ");
+                if (res.getText() == "0")
+                {
+                    operador = "sin⁻¹";
+                    res.setText("0");
+                    res2.setText( "sin⁻¹( ");
+                }
+                else
+                {
+                    firstnumber = Double.parseDouble(res.getText().toString());
+                    operador = "sin⁻¹";
+                    res2.setText( "sin⁻¹(" + res.getText().toString() +")");
+                }
             }
             else
             {
-                firstnumber = Double.parseDouble(res.getText().toString());
-                operador = "sin";
-                res2.setText( "sin(" + res.getText().toString() +")");
-
-
+                if (res.getText() == "0")
+                {
+                    operador = "sin";
+                    res.setText("0");
+                    res2.setText( "sin( ");
+                }
+                else
+                {
+                    firstnumber = Double.parseDouble(res.getText().toString());
+                    operador = "sin";
+                    res2.setText( "sin(" + res.getText().toString() +")");
+                }
             }
 
         }
@@ -360,9 +456,15 @@ public class MainActivity extends AppCompatActivity {
 
             if (res.getText() == "0")
             {
-                operador = "dx";
-                res.setText("0");
-                res2.setText( "1 / ");
+                res.setText("ERROR");
+                res2.setText("");
+
+                Context context = getApplicationContext();
+                CharSequence text = "No se puede dividir entre 0";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
             }
             else
             {
@@ -577,7 +679,7 @@ public class MainActivity extends AppCompatActivity {
                 else{
                     firstnumber = Float.parseFloat(res.getText().toString());
                     res.setText( String.valueOf(firstnumber));
-                    res2.setText("√");
+                    res2.setText("√" + firstnumber);
                     operador = "√";
                 }
 
@@ -729,7 +831,6 @@ public class MainActivity extends AppCompatActivity {
                 resultado = firstnumber * secondnumber;
                 s=String.valueOf(resultado);
                 res.setText(s);
-
                 res2.setText("");
                 break;
             case "x2":
@@ -771,32 +872,149 @@ public class MainActivity extends AppCompatActivity {
 
                 res2.setText("");
                 break;
-
             case "sin":
-                firstnumber = Double.parseDouble(res.getText().toString());
-                resultado = Math.sin(firstnumber);
-                s= String.valueOf(resultado);
-                res.setText(s);
 
-                res2.setText("");
+                if(type.getText().toString() == "RAD")
+                {
+                    firstnumber = Double.parseDouble(res.getText().toString());
+                    resultado = Math.sin(firstnumber);
+                    s= String.valueOf(resultado);
+                    res.setText(s);
+                    res2.setText("");
+                }
+                else{
+                    firstnumber = Double.parseDouble(res.getText().toString());
+                    firstnumber = Math.toRadians(firstnumber);
+                    resultado = Math.sin(firstnumber);
+                    s= String.valueOf(resultado);
+                    res.setText(s);
+                    res2.setText("");
+                }
+                break;
+
+            case "sin⁻¹":
+                firstnumber = Double.parseDouble(res.getText().toString());
+                if( firstnumber >= -1 && firstnumber <= 1  ) {
+                    if (type.getText().toString() == "RAD") {
+
+                        resultado = Math.asin(firstnumber);
+                        s = String.valueOf(resultado);
+                        res.setText(s);
+                        res2.setText("");
+                    } else {
+
+                        firstnumber = Math.toRadians(firstnumber);
+                        resultado = Math.asin(firstnumber);
+                        s = String.valueOf(resultado);
+                        res.setText(s);
+                        res2.setText("");
+                    }
+                }
+                else{
+
+                    res.setText("ERROR");
+                    res2.setText("");
+
+                    Context context = getApplicationContext();
+                    CharSequence text = "Resultado indeterminado";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                    break;
+                }
+
+
+
                 break;
             case "cos":
-                firstnumber = Double.parseDouble(res.getText().toString());
-                resultado = Math.cos(firstnumber);
-                s= String.valueOf(resultado);
-                res.setText(s);
+                if(type.getText().toString() == "RAD")
+                {
+                    firstnumber = Double.parseDouble(res.getText().toString());
+                    resultado = Math.cos(firstnumber);
+                    s= String.valueOf(resultado);
+                    res.setText(s);
+                    res2.setText("");
+                }
+                else{
+                    firstnumber = Double.parseDouble(res.getText().toString());
+                    firstnumber = Math.toRadians(firstnumber);
+                    resultado = Math.cos(firstnumber);
+                    s= String.valueOf(resultado);
+                    res.setText(s);
+                    res2.setText("");
+                }
+                break;
+            case "cos⁻¹":
 
-                res2.setText("");
+                if( firstnumber >= -1 && firstnumber <= 1  ) {
+                    if (type.getText().toString() == "RAD") {
+                        firstnumber = Double.parseDouble(res.getText().toString());
+                        resultado = Math.acos(firstnumber);
+                        s = String.valueOf(resultado);
+                        res.setText(s);
+                        res2.setText("");
+                    } else {
+                        firstnumber = Double.parseDouble(res.getText().toString());
+                        firstnumber = Math.toRadians(firstnumber);
+                        resultado = Math.acos(firstnumber);
+                        s = String.valueOf(resultado);
+                        res.setText(s);
+                        res2.setText("");
+                    }
+                }
+                else{
+
+                    res.setText("ERROR");
+                    res2.setText("");
+
+                    Context context = getApplicationContext();
+                    CharSequence text = "Resultado indeterminado";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                    break;
+                }
+
+
                 break;
             case "tan":
-                firstnumber = Double.parseDouble(res.getText().toString());
-                resultado = Math.tan(firstnumber);
-                s= String.valueOf(resultado);
-                res.setText(s);
-
-                res2.setText("");
+                if(type.getText().toString() == "RAD")
+                {
+                    firstnumber = Double.parseDouble(res.getText().toString());
+                    resultado = Math.tan(firstnumber);
+                    s= String.valueOf(resultado);
+                    res.setText(s);
+                    res2.setText("");
+                }
+                else{
+                    firstnumber = Double.parseDouble(res.getText().toString());
+                    firstnumber = Math.toRadians(firstnumber);
+                    resultado = Math.tan(firstnumber);
+                    s= String.valueOf(resultado);
+                    res.setText(s);
+                    res2.setText("");
+                }
                 break;
-
+            case "tan⁻¹":
+                if(type.getText().toString() == "RAD")
+                {
+                    firstnumber = Double.parseDouble(res.getText().toString());
+                    resultado = Math.atan(firstnumber);
+                    s= String.valueOf(resultado);
+                    res.setText(s);
+                    res2.setText("");
+                }
+                else{
+                    firstnumber = Double.parseDouble(res.getText().toString());
+                    firstnumber = Math.toRadians(firstnumber);
+                    resultado = Math.atan(firstnumber);
+                    s= String.valueOf(resultado);
+                    res.setText(s);
+                    res2.setText("");
+                }
+                break;
 
             default:
         }
